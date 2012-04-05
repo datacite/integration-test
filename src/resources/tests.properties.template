@@ -1,0 +1,12 @@
+mds_doi_url https://mds.datacite.org/doi
+mds_metadata_url https://mds.datacite.org/metadata
+mds_username [username]
+mds_password [password]
+
+oai_url http://oai.datacite.org/oai
+
+test_prefix 10.5072
+unknown_test_url http://www.datacite.org/testprefix
+
+xmlns_attribute xmlns="http://datacite.org/schema/kernel-2.2"
+schemalocation_attribute xsi:schemaLocation="http://datacite.org/schema/kernel-2.2 http://schema.datacite.org/meta/kernel-2.2/metadata.xsd"

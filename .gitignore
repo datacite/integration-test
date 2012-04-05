@@ -1,0 +1,6 @@
+/target
+/.settings
+/.classpath
+/.project
+/bin
+/src/resources/tests.properties
