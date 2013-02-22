@@ -104,64 +104,7 @@ public class MDSJUnitTests {
 	}
 	
 	@Test
-	public void test2CreateDOITestMode() throws Exception {
-		String doi = doiTestPrefix+doiTestSuffix;
-		
-		String address = doiAddress;
-		address += testMode;
-		
-		HTTPRequest request = new HTTPRequest(address);
-		request.setMethod(HTTPRequest.Method.POST);
-		request.setContentType("text/plain;charset=UTF-8");
-		request.setUsername(username);
-		request.setPassword(password);
-		request.setBody("doi="+doi+"\nurl="+url);
-		
-		HTTPResponse response = client.makeAPICall(request);
-		
-		Assert.assertEquals(response.toString(),201,response.getResponseCode());
-		Assert.assertTrue(response.toString(),response.getResponseBody().startsWith("OK"));		
-	}
-	
-	@Test
-	public void test3CreateDOI() throws Exception {
-		String doi = doiTestPrefix+doiTestSuffix;
-		
-		String address = doiAddress; 
-		
-		HTTPRequest request = new HTTPRequest(address);
-		request.setMethod(HTTPRequest.Method.POST);
-		request.setContentType("text/plain;charset=UTF-8");
-		request.setUsername(username);
-		request.setPassword(password);
-		request.setBody("doi="+doi+"\nurl="+url);
-		
-		HTTPResponse response = client.makeAPICall(request);
-		
-		Assert.assertEquals(response.toString(),201,response.getResponseCode());
-		Assert.assertTrue(response.toString(),response.getResponseBody().startsWith("OK"));				
-	}
-	
-	@Test
-	public void test4GetDOI() throws Exception {
-		String doi = doiTestPrefix+doiTestSuffix;
-		
-		String address = doiAddress;
-		address += "/"+doi;
-		
-		HTTPRequest request = new HTTPRequest(address);
-		request.setUsername(username);
-		request.setPassword(password);
-		request.setMethod(HTTPRequest.Method.GET);
-		
-		HTTPResponse response = client.makeAPICall(request);
-		
-		Assert.assertEquals(response.toString(),200, response.getResponseCode());
-		Assert.assertEquals(response.toString(),url, response.getResponseBody());
-	}	
-	
-	@Test
-	public void test5GetUnknownMetadata() throws Exception{
+	public void test2GetUnknownMetadata() throws Exception{
 		String doi = metadata.getDoi();
 		
 		String address = metadataAddress;
@@ -176,11 +119,11 @@ public class MDSJUnitTests {
 		HTTPResponse response = client.makeAPICall(request);
 		
 		Assert.assertEquals(response.toString(),404,response.getResponseCode());
-		Assert.assertTrue(response.toString(),response.getResponseBody().contains("no metadata"));		
-	}
+		Assert.assertTrue(response.toString(),response.getResponseBody().contains("DOI is unknown"));		
+	}	
 	
 	@Test
-	public void test6CreateMetadataTestMode() throws Exception {
+	public void test3CreateMetadataTestMode() throws Exception {
 		
 		String address = metadataAddress;
 		address += testMode;
@@ -200,7 +143,7 @@ public class MDSJUnitTests {
 	}
 	
 	@Test
-	public void test7CreateMetadata() throws Exception {
+	public void test4CreateMetadata() throws Exception {
 		
 		String address = metadataAddress;
 		
@@ -217,6 +160,63 @@ public class MDSJUnitTests {
 		Assert.assertTrue(response.toString(),response.getResponseBody().startsWith("OK"));
 		Assert.assertTrue(response.toString(),response.getResponseBody().contains(metadata.getDoi()));						
 	}
+	
+	@Test
+	public void test5CreateDOITestMode() throws Exception {
+		String doi = doiTestPrefix+doiTestSuffix;
+		
+		String address = doiAddress;
+		address += testMode;
+		
+		HTTPRequest request = new HTTPRequest(address);
+		request.setMethod(HTTPRequest.Method.POST);
+		request.setContentType("text/plain;charset=UTF-8");
+		request.setUsername(username);
+		request.setPassword(password);
+		request.setBody("doi="+doi+"\nurl="+url);
+		
+		HTTPResponse response = client.makeAPICall(request);
+		
+		Assert.assertEquals(response.toString(),201,response.getResponseCode());
+		Assert.assertTrue(response.toString(),response.getResponseBody().startsWith("OK"));		
+	}	
+	
+	@Test
+	public void test6CreateDOI() throws Exception {
+		String doi = doiTestPrefix+doiTestSuffix;
+		
+		String address = doiAddress; 
+		
+		HTTPRequest request = new HTTPRequest(address);
+		request.setMethod(HTTPRequest.Method.POST);
+		request.setContentType("text/plain;charset=UTF-8");
+		request.setUsername(username);
+		request.setPassword(password);
+		request.setBody("doi="+doi+"\nurl="+url);
+		
+		HTTPResponse response = client.makeAPICall(request);
+		
+		Assert.assertEquals(response.toString(),201,response.getResponseCode());
+		Assert.assertTrue(response.toString(),response.getResponseBody().startsWith("OK"));				
+	}
+	
+	@Test
+	public void test7GetDOI() throws Exception {
+		String doi = doiTestPrefix+doiTestSuffix;
+		
+		String address = doiAddress;
+		address += "/"+doi;
+		
+		HTTPRequest request = new HTTPRequest(address);
+		request.setUsername(username);
+		request.setPassword(password);
+		request.setMethod(HTTPRequest.Method.GET);
+		
+		HTTPResponse response = client.makeAPICall(request);
+		
+		Assert.assertEquals(response.toString(),200, response.getResponseCode());
+		Assert.assertEquals(response.toString(),url, response.getResponseBody());
+	}	
 	
 	@Test
 	public void test8GetMetadata() throws Exception{
